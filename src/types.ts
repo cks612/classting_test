@@ -13,3 +13,13 @@ export interface Props {
   resultStyle: string;
   disabled: boolean;
 }
+
+export type queryDataType = {
+  data: queryDataType2;
+  enabled: boolean;
+};
+
+type queryDataType2 = {
+  data: object;
+  results: elementType[];
+};

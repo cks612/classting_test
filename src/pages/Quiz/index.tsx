@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGetQuizData } from "../../hooks/useCustomerHooks";
-import { elementType } from "../../types";
+import { elementType, queryDataType } from "../../types";
 import fysOriginal from "../../utils/fysOriginal";
 import * as S from "../../styles/_CommonCssStyles";
 import SelectorsBox from "../../components/SelectorsBox/SelectorsBox";
 import SponsoredSkeleton from "../../components/Skeleton/SponsoredSkeleton";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 const Quiz: React.FC = () => {
   const [quizData, setQuizData] = useState<elementType[]>([]);
@@ -21,18 +22,19 @@ const Quiz: React.FC = () => {
   // - 그냥 메인화면 보내기
   // 시작순간시간을 로컬에 저장 끝났을 때 시간도 저장 후 빼기
 
-  const onSuccess = (data: { data: { results: elementType[] } }) => {
+  const onSuccess = (data: queryDataType): void => {
     console.log("====", data);
-    data && setQuizData(data.data.results);
+    setQuizData(data.data.results);
   };
 
-  const onError = (error: Error) => {
+  const onError = (error: Error): void => {
     console.log("====", error);
   };
 
-  const { isLoading, data, refetch } = useGetQuizData(onSuccess, onError, {
-    enabled: true,
-  });
+  const { isLoading, data, refetch }: UseQueryResult<queryDataType> =
+    useGetQuizData(onSuccess, onError, {
+      enabled: true,
+    });
 
   const fetchDataQueryHandler = () => {
     refetch();
@@ -131,8 +133,10 @@ const SelectorsContainer = styled.div`
 
 const NextButton = styled.div`
   ${S.commonDisplay}
-  width:100%;
+  position: absolute;
+  width: 100%;
   height: 60px;
+  bottom: -100px;
   border: 0.5px solid ${({ theme }) => theme.whiteColor};
   border-radius: 10px;
   font-weight: 500;
