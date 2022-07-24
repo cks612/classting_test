@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import { UseQueryResult } from "@tanstack/react-query";
 import { useGetQuizData } from "../../hooks/useCustomerHooks";
 import { elementType, queryDataType } from "../../types";
+import styled from "styled-components";
 import fysOriginal from "../../utils/fysOriginal";
-import * as S from "../../styles/_CommonCssStyles";
 import SelectorsBox from "../../components/SelectorsBox/SelectorsBox";
 import SponsoredSkeleton from "../../components/Skeleton/SponsoredSkeleton";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import * as S from "../../styles/_CommonCssStyles";
 
 const Quiz: React.FC = () => {
   const [quizData, setQuizData] = useState<elementType[]>([]);
@@ -14,7 +14,7 @@ const Quiz: React.FC = () => {
   const [randomSelectors, setRandomSelectors] = useState<string[]>([]);
   const [isSelected, setIsSelected] = useState("");
   const uuid = require("react-uuid");
-  const skeletonArr: number[] = [1, 2, 3, 4, 5];
+  const skeletonArr: number[] = [1];
 
   // 문제를 다 풀었다 === quuestionCount === 10 => 정오답 결과에 기록한다.
   // 풀었던 문제 다시 풀기  => quizeData 섞기 setQuestionCount(0);
