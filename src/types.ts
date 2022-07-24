@@ -28,3 +28,8 @@ export interface ChartType {
   value: number;
   color: string;
 }
+
+export interface ButtonType {
+  id: number;
+  data: string;
+}

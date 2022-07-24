@@ -4,7 +4,7 @@ import { ChartType } from "../../types";
 export const MyResponsivePie = ({ data }: { data: ChartType[] }) => (
   <ResponsivePie
     data={data}
-    margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+    margin={{ top: 20, right: 80, bottom: 80, left: 80 }}
     startAngle={-2}
     innerRadius={0.5}
     padAngle={0.7}
