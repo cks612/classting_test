@@ -8,7 +8,12 @@ const index = () => {
     <MainWrapper>
       <Title>
         Classting
-        <p>"Click Start to challenge our Quiz!"</p>
+        <p>
+          "Click Start to challenge our Quiz!"
+          <span>
+            <i className="fa-solid fa-circle-right"></i>
+          </span>
+        </p>
       </Title>
       <Box>
         <Content>
@@ -36,6 +41,7 @@ const MainWrapper = styled.div`
 const Title = styled.h1`
   position: relative;
   padding-right: 50px;
+  padding-bottom: 20px;
   font-size: 8em;
   font-weight: 900;
   color: ${({ theme }) => theme.whiteColor};
@@ -46,11 +52,30 @@ const Title = styled.h1`
     right: 0;
     bottom: 0;
     padding-right: 50px;
-    font-size: 1rem;
+    font-size: 1.5rem;
 
     &:nth-child(2) {
       opacity: 0;
     }
+
+    i {
+      animation: iconAnimate 2s linear infinite;
+    }
+
+    @keyframes iconAnimate {
+      0%,
+      100% {
+        transform: translateX(0px);
+      }
+
+      50% {
+        transform: translateX(10px);
+      }
+    }
+  }
+
+  i {
+    padding-left: 20px;
   }
 `;
 

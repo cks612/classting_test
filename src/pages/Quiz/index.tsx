@@ -7,12 +7,17 @@ import fysOriginal from "../../utils/fysOriginal";
 import SelectorsBox from "../../components/SelectorsBox/SelectorsBox";
 import SponsoredSkeleton from "../../components/Skeleton/SponsoredSkeleton";
 import * as S from "../../styles/_CommonCssStyles";
+import ResultModal from "../../components/ResultModal/ResultModal";
 
 const Quiz: React.FC = () => {
   const [quizData, setQuizData] = useState<elementType[]>([]);
   const [questionCount, setQuestionCount] = useState(0);
   const [randomSelectors, setRandomSelectors] = useState<string[]>([]);
   const [isSelected, setIsSelected] = useState("");
+  const [isModalOn, setIsModalOn] = useState(false);
+  const [correctAnswer, setCorrectAnswer] = useState(0);
+  const [wrongAnswer, setWrongAnswer] = useState(0);
+
   const uuid = require("react-uuid");
   const skeletonArr: number[] = [1];
 
@@ -31,23 +36,35 @@ const Quiz: React.FC = () => {
     console.log("====", error);
   };
 
-  const { isLoading, data, refetch }: UseQueryResult<queryDataType> =
-    useGetQuizData(onSuccess, onError, {
-      enabled: true,
-    });
+  const { isFetching, data, refetch }: UseQueryResult<queryDataType> =
+    useGetQuizData(onSuccess, onError);
 
   const fetchDataQueryHandler = () => {
+    const startTime: Date = new Date();
+    localStorage.setItem("startTime", JSON.stringify(startTime));
     refetch();
   };
-
   const submitAnswersHandler = (e: React.MouseEvent<HTMLTextAreaElement>) => {
     const { innerText } = e.target as HTMLButtonElement;
+
+    if (quizData[questionCount].correct_answer === innerText) {
+      setCorrectAnswer(correctAnswer + 1);
+    } else if (quizData[questionCount].correct_answer !== innerText) {
+      setWrongAnswer(wrongAnswer + 1);
+    }
     setIsSelected(innerText);
   };
-
+  console.log(correctAnswer);
   const nextQuestionHandler = () => {
-    setIsSelected("");
-    setQuestionCount(questionCount + 1);
+    if (questionCount === quizData.length - 1) {
+      localStorage.setItem("CorrecAnswer", JSON.stringify(correctAnswer));
+      localStorage.setItem("WrongAnswer", JSON.stringify(wrongAnswer));
+      alert("퀴즈가 끝났습니다!");
+      setIsModalOn(!isModalOn);
+    } else {
+      setIsSelected("");
+      setQuestionCount(questionCount + 1);
+    }
   };
 
   useEffect(() => {
@@ -64,12 +81,14 @@ const Quiz: React.FC = () => {
     <>
       <QuizPageWrapper>
         <QuestionsContainer>
-          {isLoading &&
+          {isFetching &&
             skeletonArr?.map(() => <SponsoredSkeleton key={uuid()} />)}
 
-          {data && (
+          {data ? (
             <>
-              <Questions>{quizData[questionCount].question}</Questions>
+              <Questions>
+                {questionCount + 1}번 {quizData[questionCount].question}
+              </Questions>
               <SelectorsContainer>
                 {randomSelectors?.map((selector, index) => {
                   const isCorrect =
@@ -86,10 +105,15 @@ const Quiz: React.FC = () => {
                 })}
               </SelectorsContainer>
             </>
+          ) : (
+            <button onClick={fetchDataQueryHandler}>start</button>
           )}
+
           {isSelected && (
             <NextButton onClick={nextQuestionHandler}>NEXT &gt;</NextButton>
           )}
+
+          {isModalOn && <ResultModal></ResultModal>}
         </QuestionsContainer>
       </QuizPageWrapper>
     </>

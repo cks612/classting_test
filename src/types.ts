@@ -21,3 +21,10 @@ export type queryDataType = {
 type queryDataType2 = {
   results: elementType[];
 };
+
+export interface ChartType {
+  id: string;
+  label: string;
+  value: number;
+  color: string;
+}
