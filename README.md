@@ -1,6 +1,6 @@
 # Classting Coding Test
 
-[![NPM Version][npm-image]][npm-url]
+![NPM Version][npm-image]
 [![Build Status][travis-image]][travis-url]
 
 Classting 온라인 과제 시험으로 React.js를 사용하여 만든 퀴즈 사이트입니다.
@@ -20,66 +20,65 @@ npm start
 ### 메인 페이지
 
 ![](https://user-images.githubusercontent.com/66737450/180738862-fe97222a-12c0-410e-89b8-e562834d4f1a.png)
+`최대한 깔끔하고 포인트 있게 구현할려고 했습니다`
 
 ### 시작버튼
 
 ![](https://user-images.githubusercontent.com/66737450/180740759-1f340bc4-1889-43f4-8ad4-7eed208b729f.png)
+`로고에 마우스를 hover하면 start 버튼이 나옵니다`
 
 ### 시작버튼2
 
 ![](https://user-images.githubusercontent.com/66737450/180741014-3bf666cd-ce70-4dc2-aacd-2f225636a5d3.png)
+`준비되셨으면 시작하기 버튼을 누르고 퀴즈를 풀어주세요!`
 
 ### 퀴즈페이지
 
 ![](https://user-images.githubusercontent.com/66737450/180741119-9a8a25b1-cd34-42cd-a3af-d52f5db77c00.png)
+`문제는 총 10문제로 영어로 되어 있습니다!`
 
-_더 많은 예제와 사용법은 [Wiki][wiki]를 참고하세요._
+### 퀴즈 결과
 
-## 개발 환경 설정
+![](https://user-images.githubusercontent.com/66737450/180742873-18c02593-51a1-4d50-9317-aa9163ad410d.png)
+`정오답 결과와 비율을 차트로 표현했으며 같은 문제 다시 풀기, 새로운 문제 풀기, 메인화면으로 가는 버튼들이 있습니다`
 
-모든 개발 의존성 설치 방법과 자동 테스트 슈트 실행 방법을 운영체제 별로 작성합니다.
+## 개발 환경
 
 ```sh
-make install
-npm test
+React.js
+Styled-Components
+React-Query
+TypeScript
 ```
 
-## 업데이트 내역
+## 아쉬운점
 
-- 0.2.1
-  - 수정: 문서 업데이트 (모듈 코드 동일)
-- 0.2.0
-  - 수정: `setDefaultXYZ()` 메서드 제거
-  - 추가: `init()` 메서드 추가
-- 0.1.1
-  - 버그 수정: `baz()` 메서드 호출 시 부팅되지 않는 현상 (@컨트리뷰터 감사합니다!)
-- 0.1.0
-  - 첫 출시
-  - 수정: `foo()` 메서드 네이밍을 `bar()`로 수정
-- 0.0.1
-  - 작업 진행 중
+1. 시간계산
+
+- Date Picker 라이브러리를 쓰지 않고 new Date() 로만 구현할려다 보니까 코드가 조금 길어진 것 같습니다. 라이브러리를 쓰던지 더욱 더 효율적인 방법이 있을 것 같습니다.
+
+2. 데이터 Saving
+
+- 사용자가 문제 푼 데이터를 저장 했다가 같은 문제를 다시 풀었을 때 비교할 수 있는 차트를 못 만든게 아쉽습니다.
+
+3. 전역관리
+
+- 정오답 갯수와 데이터를 Recoil로 전역관리를 할려고 했으나 result 페이지를 모달 컴포넌트로 만드느라 구현하지 못 한게 아쉽습니다.
+
+4. 테스트 코드 작성
+
+- 처음 해 보는 테스트 코드 작성이라 제대로 작성 못 해본게 아쉽고 너무 어렵게 느껴진 것 같습니다.
+
+- 그래도 Jest를 배우며 조금이라도 성장할 수 있는 기회라 좋았습니다. 조금 더 테스트 코드 작성에 대해 공부할려고 합니다.
 
 ## 정보
 
-이름 – [@트위터 주소](https://twitter.com/dbader_org) – 이메일주소@example.com
+최규성 – [@깃허브](https://github.com/cks612)
 
-XYZ 라이센스를 준수하며 `LICENSE`에서 자세한 정보를 확인할 수 있습니다.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
-
-## 기여 방법
-
-1. (<https://github.com/yourname/yourproject/fork>)을 포크합니다.
-2. (`git checkout -b feature/fooBar`) 명령어로 새 브랜치를 만드세요.
-3. (`git commit -am 'Add some fooBar'`) 명령어로 커밋하세요.
-4. (`git push origin feature/fooBar`) 명령어로 브랜치에 푸시하세요.
-5. 풀리퀘스트를 보내주세요.
+[https://github.com/cks612](https://github.com/cks612)
 
 <!-- Markdown link & img dfn's -->
 
 [npm-image]: https://img.shields.io/npm/v/npm
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
 [travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/yourname/yourproject/wiki
