@@ -1,4 +1,4 @@
-import React, { ReactEventHandler } from "react";
+import React, { ReactEventHandler, useEffect } from "react";
 import * as S from "../../styles/_ResultModalStyles";
 import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 import { MyResponsivePie } from "../Chart/Chart";
@@ -15,8 +15,10 @@ const buttonData: ButtonType[] = [
 
 const ResultModal = ({
   nextStepHandler,
+  startTime,
 }: {
   nextStepHandler: ReactEventHandler;
+  startTime: Date;
 }) => {
   const correctAnswer: number = parseInt(
     localStorage.getItem("CorrecAnswer") || ""
@@ -40,13 +42,24 @@ const ResultModal = ({
       color: "hsl(320, 70%, 50%)",
     },
   ];
+  const elapsedTime = (startTime: Date) => {
+    const endTime: Date = new Date();
+    let interval = endTime.getTime() - startTime.getTime();
 
-  let startTime: Date = new Date(
-    parseInt(localStorage.getItem("startTime") || "")
-  );
-  const endTime: Date = new Date();
-  const diffMinutes = endTime.getMinutes() - startTime.getMinutes();
-  const diffSeconds = endTime.getSeconds() - startTime.getSeconds();
+    const diffHours = Math.floor(interval / (1000 * 60 * 60));
+    interval = interval - diffHours * (1000 * 60 * 60);
+
+    const diffMinutes = Math.floor(interval / (1000 * 60));
+    interval = interval - diffMinutes * (1000 * 60);
+
+    const diffSeconds = Math.floor(interval / 1000);
+
+    const elapsedText = diffMinutes + "분" + diffSeconds + "초";
+
+    return elapsedText;
+  };
+
+  const calculateTime = elapsedTime(startTime);
 
   const correctRatio = Math.floor(
     (correctAnswer / (correctAnswer + wrongAnswer)) * 100
@@ -58,9 +71,7 @@ const ResultModal = ({
       <S.ResultModalWrapper>
         <S.ResultTitle>
           Quiz Summery
-          <p>
-            총 소요시간 : {diffMinutes}분 {diffSeconds}초
-          </p>
+          {calculateTime && <p>총 소요시간 : {calculateTime}</p>}
         </S.ResultTitle>
         <S.ResultSummery>
           <S.ResultRatio>

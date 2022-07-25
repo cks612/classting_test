@@ -18,6 +18,7 @@ const Quiz: React.FC = () => {
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [wrongAnswer, setWrongAnswer] = useState(0);
   const navigate = useNavigate();
+  let startTime: Date = new Date();
 
   const uuid = require("react-uuid");
   const skeletonArr: number[] = [1];
@@ -35,8 +36,9 @@ const Quiz: React.FC = () => {
     useGetQuizData(onSuccess, onError);
 
   const fetchDataQueryHandler = () => {
-    const startTime: Date = new Date();
-    localStorage.setItem("startTime", JSON.stringify(startTime));
+    startTime = new Date();
+    // localStorage.setItem("startTime", JSON.stringify(startTime) || "");
+    console.log(startTime);
     refetch();
   };
   const submitAnswersHandler = (e: React.MouseEvent<HTMLTextAreaElement>) => {
@@ -136,7 +138,12 @@ const Quiz: React.FC = () => {
             <S.NextButton onClick={nextQuestionHandler}>NEXT &gt;</S.NextButton>
           )}
 
-          {isModalOn && <ResultModal nextStepHandler={nextStepHandler} />}
+          {isModalOn && (
+            <ResultModal
+              nextStepHandler={nextStepHandler}
+              startTime={startTime}
+            />
+          )}
         </S.QuestionsContainer>
       </S.QuizPageWrapper>
     </>
