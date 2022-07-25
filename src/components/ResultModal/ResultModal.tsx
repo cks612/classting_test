@@ -58,7 +58,7 @@ const ResultModal = ({
 
     const diffSeconds = Math.floor(interval / 1000);
 
-    const elapsedText = diffMinutes + "분" + diffSeconds + "초";
+    const elapsedText = diffMinutes + "분 " + diffSeconds + "초";
 
     return elapsedText;
   };
