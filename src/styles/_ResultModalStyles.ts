@@ -1,5 +1,6 @@
 import * as S from "../styles/_CommonCssStyles";
 import styled from "styled-components";
+import { devices } from "./_MediaQueryStyles";
 
 export const HideScreen = styled.div`
   position: fixed;
@@ -39,6 +40,10 @@ export const ResultTitle = styled.div`
     font-size: 0.3em;
     font-weight: 500;
   }
+
+  @media ${devices.laptopL} {
+    font-size: 0.5em;
+  }
 `;
 
 export const ResultSummery = styled.div`
@@ -48,6 +53,10 @@ export const ResultSummery = styled.div`
   font-size: 1em;
   font-weight: 500;
   color: ${({ theme }) => theme.whiteColor};
+
+  @media ${devices.laptopL} {
+    justify-content: stretch;
+  }
 `;
 
 export const ResultRatio = styled.div`
@@ -60,11 +69,18 @@ export const ResultRatio = styled.div`
   p {
     font-size: 0.3em;
   }
+  @media ${devices.tablet} {
+    flex: 0 0 100%;
+  }
 `;
 
 export const VLine = styled.div`
   border-left: 1px solid ${({ theme }) => theme.whiteColor};
   height: 50%;
+
+  @media ${devices.tablet} {
+    display: none;
+  }
 `;
 
 export const ResultAnswersContainer = styled.div`
@@ -74,6 +90,10 @@ export const ResultAnswersContainer = styled.div`
   flex-direction: column;
   flex: 0 0 50%;
   font-size: 0.5em;
+
+  @media ${devices.tablet} {
+    flex: 0 0 0%;
+  }
 `;
 export const ResultAnswersContent = styled.div`
   display: flex;
@@ -82,6 +102,10 @@ export const ResultAnswersContent = styled.div`
 
   i {
     padding-right: 20px;
+  }
+
+  @media ${devices.tablet} {
+    display: none;
   }
 `;
 
@@ -96,6 +120,10 @@ export const ResultChart = styled.div`
   flex: 0 0 50%;
   width: 450px;
   height: 300px;
+
+  @media ${devices.tablet} {
+    flex: 0 0 100%;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -118,6 +146,10 @@ export const ButtonContainer = styled.div`
 
     &:hover {
       background: ${({ theme }) => theme.grayColor};
+    }
+
+    @media ${devices.tablet} {
+      display: none;
     }
   }
 `;

@@ -18,8 +18,7 @@ const Quiz: React.FC = () => {
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [wrongAnswer, setWrongAnswer] = useState(0);
   const navigate = useNavigate();
-  let startTime: Date = new Date();
-
+  const startTime: Date = new Date();
   const uuid = require("react-uuid");
   const skeletonArr: number[] = [1];
 
@@ -36,11 +35,10 @@ const Quiz: React.FC = () => {
     useGetQuizData(onSuccess, onError);
 
   const fetchDataQueryHandler = () => {
-    startTime = new Date();
-    // localStorage.setItem("startTime", JSON.stringify(startTime) || "");
-    console.log(startTime);
+    localStorage.setItem("startTime", JSON.stringify(startTime) || "");
     refetch();
   };
+
   const submitAnswersHandler = (e: React.MouseEvent<HTMLTextAreaElement>) => {
     const { innerText } = e.target as HTMLButtonElement;
 
@@ -69,6 +67,7 @@ const Quiz: React.FC = () => {
     localStorage.clear();
 
     if (parseInt(value) === 1) {
+      localStorage.setItem("startTime", JSON.stringify(startTime) || "");
       setQuestionCount(0);
       setIsSelected("");
       setCorrectAnswer(0);
@@ -105,10 +104,17 @@ const Quiz: React.FC = () => {
     <>
       <S.QuizPageWrapper>
         <S.QuestionsContainer>
-          {isFetching &&
-            skeletonArr?.map(() => <SponsoredSkeleton key={uuid()} />)}
+          {isFetching ? (
+            skeletonArr?.map(() => <SponsoredSkeleton key={uuid()} />)
+          ) : data ? (
+            " "
+          ) : (
+            <S.StartButton onClick={fetchDataQueryHandler}>
+              준비되셨나요?<p>시작하기</p>
+            </S.StartButton>
+          )}
 
-          {data && quizData.length ? (
+          {data && (
             <>
               <S.Questions>
                 <h2>{questionCount + 1}</h2>
@@ -130,20 +136,11 @@ const Quiz: React.FC = () => {
                 })}
               </S.SelectorsContainer>
             </>
-          ) : (
-            <button onClick={fetchDataQueryHandler}>start</button>
           )}
-
           {isSelected && (
             <S.NextButton onClick={nextQuestionHandler}>NEXT &gt;</S.NextButton>
           )}
-
-          {isModalOn && (
-            <ResultModal
-              nextStepHandler={nextStepHandler}
-              startTime={startTime}
-            />
-          )}
+          {isModalOn && <ResultModal nextStepHandler={nextStepHandler} />}
         </S.QuestionsContainer>
       </S.QuizPageWrapper>
     </>

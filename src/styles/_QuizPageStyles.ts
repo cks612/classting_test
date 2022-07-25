@@ -57,3 +57,53 @@ export const NextButton = styled.div`
     background: #fff3;
   }
 `;
+
+export const StartButton = styled.button`
+  ${S.commonDisplay}
+  flex-direction: column;
+  width: 200px;
+  height: 100px;
+  border: 3px solid #fff;
+  border-radius: 20px;
+  background: ${({ theme }) => theme.backGroundColor};
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 500;
+  cursor: pointer;
+  animation: buttonAnimate 4s infinite;
+
+  @keyframes buttonAnimate {
+    5%,
+    50% {
+      transform: scale(1);
+    }
+
+    10% {
+      transform: scale(0.9);
+    }
+
+    15% {
+      transform: scale(1.15);
+    }
+
+    20% {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    25% {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    30% {
+      transform: scale(1.15) rotate(-3deg);
+    }
+
+    35% {
+      transform: scale(1.15) rotate(2deg);
+    }
+
+    40% {
+      transform: scale(1.15) rotate(0);
+    }
+  }
+`;

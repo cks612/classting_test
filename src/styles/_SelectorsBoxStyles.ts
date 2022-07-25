@@ -11,7 +11,6 @@ export const Questions = styled.button<Props>`
   cursor: pointer;
 
   ${({ resultStyle }) => {
-    console.log(resultStyle);
     if (resultStyle === "정답") {
       return css`
         border: 1px solid lightgreen;

@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, useEffect } from "react";
+import React, { ReactEventHandler, useEffect, useState } from "react";
 import * as S from "../../styles/_ResultModalStyles";
 import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 import { MyResponsivePie } from "../Chart/Chart";
@@ -15,11 +15,11 @@ const buttonData: ButtonType[] = [
 
 const ResultModal = ({
   nextStepHandler,
-  startTime,
 }: {
   nextStepHandler: ReactEventHandler;
-  startTime: Date;
 }) => {
+  const [calculateTime, setCalculateTime] = useState("");
+
   const correctAnswer: number = parseInt(
     localStorage.getItem("CorrecAnswer") || ""
   );
@@ -42,8 +42,12 @@ const ResultModal = ({
       color: "hsl(320, 70%, 50%)",
     },
   ];
-  const elapsedTime = (startTime: Date) => {
+  const elapsedTime = () => {
     const endTime: Date = new Date();
+    const startTime: Date = new Date(
+      JSON.parse(localStorage.getItem("startTime") || "")
+    );
+
     let interval = endTime.getTime() - startTime.getTime();
 
     const diffHours = Math.floor(interval / (1000 * 60 * 60));
@@ -59,7 +63,9 @@ const ResultModal = ({
     return elapsedText;
   };
 
-  const calculateTime = elapsedTime(startTime);
+  useEffect(() => {
+    setCalculateTime(elapsedTime());
+  }, []);
 
   const correctRatio = Math.floor(
     (correctAnswer / (correctAnswer + wrongAnswer)) * 100
@@ -71,7 +77,7 @@ const ResultModal = ({
       <S.ResultModalWrapper>
         <S.ResultTitle>
           Quiz Summery
-          {calculateTime && <p>총 소요시간 : {calculateTime}</p>}
+          <p>총 소요시간 : {calculateTime}</p>
         </S.ResultTitle>
         <S.ResultSummery>
           <S.ResultRatio>
@@ -111,8 +117,5 @@ const ResultModal = ({
       {useLockBodyScroll};
     </>
   );
-}; // 풀었던 문제 다시 풀기  => quizeData 섞기 setQuestionCount(0);
-// 새 문제 다시 풀기 => setQuestionCount(0); fetch(새 문제 받아오기)
-// - 그냥 메인화면 보내기
-
+};
 export default ResultModal;

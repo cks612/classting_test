@@ -1,11 +1,20 @@
 import * as S from "../styles/_CommonCssStyles";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { devices } from "./_MediaQueryStyles";
 
 export const MainWrapper = styled.div`
   ${S.commonDisplay}
   min-height: 100vh;
   background: ${({ theme }) => theme.backGroundColor};
+`;
+
+export const MainContainer = styled.div`
+  ${S.commonDisplay}
+  max-width: 1200px;
+  width: 100%;
+  padding: 15px 15px;
+  margin: 0 auto;
 `;
 
 export const Title = styled.h1`
@@ -86,6 +95,10 @@ export const Box = styled.div`
     100% {
       transform: rotate(360deg);
     }
+  }
+
+  @media ${devices.laptop} {
+    display: none;
   }
 `;
 
