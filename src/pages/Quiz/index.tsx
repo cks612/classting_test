@@ -117,7 +117,7 @@ const Quiz: React.FC = () => {
           {data && (
             <>
               <S.Questions>
-                <h2>{questionCount + 1}</h2>
+                <p>{questionCount + 1}</p>
                 {quizData[questionCount].question}
               </S.Questions>
               <S.SelectorsContainer>

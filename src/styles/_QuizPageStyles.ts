@@ -26,7 +26,7 @@ export const Questions = styled.h1`
   padding: 20px 20px;
   border-radius: 15px;
 
-  h2 {
+  p {
     position: absolute;
     left: 0;
     top: -50px;

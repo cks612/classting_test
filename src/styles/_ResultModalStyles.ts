@@ -31,7 +31,7 @@ export const ResultTitle = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 30px 20px;
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: 900;
   color: ${({ theme }) => theme.whiteColor};
   gap: 10px;
@@ -42,7 +42,7 @@ export const ResultTitle = styled.div`
   }
 
   @media ${devices.laptopL} {
-    font-size: 0.5em;
+    /* font-size: 0.5em; */
   }
 `;
 
