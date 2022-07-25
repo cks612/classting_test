@@ -117,7 +117,7 @@ const Quiz: React.FC = () => {
           {data && (
             <>
               <S.Questions>
-                <p>{questionCount + 1}</p>
+                <p>{questionCount + 1} / 10</p>
                 {quizData[questionCount].question}
               </S.Questions>
               <S.SelectorsContainer>
