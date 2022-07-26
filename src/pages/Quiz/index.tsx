@@ -79,6 +79,7 @@ const Quiz: React.FC = () => {
       setWrongAnswer(0);
       setIsSelected("");
       setIsModalOn(!isModalOn);
+      setQuizData([]);
       fetchDataQueryHandler();
     } else {
       setQuizData([]);
@@ -114,7 +115,7 @@ const Quiz: React.FC = () => {
             </S.StartButton>
           )}
 
-          {data && (
+          {data && quizData.length && (
             <>
               <S.Questions>
                 <p>{questionCount + 1} / 10</p>
